@@ -4,7 +4,7 @@ class MainClass {
   public static void Main (string[] args) {
     string name, companyName, res;
     float workerCost = 100000, wage = 10;
-    double companyValue = 750000, personalProfit = 45000, envCosts = 20000;
+    double companyValue = 750000, personalProfit = 45000, envCosts = 20000, revenue = 20000;
     int month = 1, workers = 10000;
     bool wageChange = true, workerChange = true;
     Console.WriteLine("Welcome to the business simulator.\n==========\nPlease enter your name:");
@@ -50,6 +50,14 @@ class MainClass {
     } else if (res == "stop") {
       break;
     }
+    if (wage <= 6) {
+      workers = workers - (workers / 4);
+      Console.WriteLine("You lost some workers because your wage was too low!");
+    }
+    if (revenue < -10000) {
+      Console.WriteLine("You went out of business!");
+      break;
+    } 
    month++; 
   }
 }
