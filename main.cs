@@ -14,51 +14,51 @@ class MainClass {
     Console.WriteLine("Thank you. Press enter to begin.");
     Console.ReadKey();
     while (true) {
-    Console.WriteLine("==========\n\nStart of month " + month + "\nCost of workers: $" + workerCost + "\nEnvironment costs: $" + envCosts + "\nCompany Value: $" + companyValue + "\nYour profit per month: $" + personalProfit);
-    Console.WriteLine("\nAmount of workers: " + workers);
-    Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
-    res = Console.ReadLine();
-    if (res == "y") {
-      Console.WriteLine("Change to what?");
-      while (wageChange) {
-        try {
-          wage = float.Parse(Console.ReadLine());
-          workerCost = workers * wage;
-          Console.WriteLine("Changed wage to " + wage + ". Current worker costs: $" + workerCost + "\nCurrent workers: " + workers);
-          wageChange = false;
-        } catch (Exception e) {
-          Console.WriteLine("That's not a valid in-range number. Change to what?");
+      Console.WriteLine("==========\n\nStart of month " + month + "\nCost of workers: $" + workerCost + "\nEnvironment costs: $" + envCosts + "\nCompany Value: $" + companyValue + "\nYour profit per month: $" + personalProfit);
+      Console.WriteLine("\nAmount of workers: " + workers);
+      Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
+      res = Console.ReadLine();
+      if (res == "y") {
+        Console.WriteLine("Change to what?");
+          while (wageChange) {
+            try {
+              wage = float.Parse(Console.ReadLine());
+              workerCost = workers * wage;
+              Console.WriteLine("Changed wage to " + wage + ". Current worker costs: $" + workerCost + "\nCurrent workers: " + workers);
+              wageChange = false;
+            } catch (Exception e) {
+              Console.WriteLine("That's not a valid in-range number. Change to what?");
+            }
+          }
+        } else if (res == "stop") {
+          break;
         }
-      }
-    } else if (res == "stop") {
-      break;
-    }
-    Console.WriteLine("Change amount of workers?(y or n or stop)");
-    res = Console.ReadLine();
-    if (res == "y") {
-      Console.WriteLine("Change to what?");
-      while (workerChange) {
-        try {
-          workers = Convert.ToInt32(Console.ReadLine());
-          workerCost = workers * wage;
-          Console.WriteLine("Changed workers to " + workers + ". Current worker costs: " + workerCost);
-          workerChange = false;
-        } catch (Exception e) {
-          Console.WriteLine("That's not a valid in-range number. Chnage to what?");
+        Console.WriteLine("Change amount of workers?(y or n or stop)");
+        res = Console.ReadLine();
+        if (res == "y") {
+          Console.WriteLine("Change to what?");
+            while (workerChange) {
+              try {
+                workers = Convert.ToInt32(Console.ReadLine());
+                workerCost = workers * wage;
+                Console.WriteLine("Changed workers to " + workers + ". Current worker costs: " + workerCost);
+                workerChange = false;
+                } catch (Exception e) {
+                  Console.WriteLine("That's not a valid in-range number. Chnage to what?");
+                }
+              }
+            } else if (res == "stop") {
+              break;
+            }
+            if (wage <= 6) {
+              workers = workers - ((Math.Abs(Convert.ToInt32(wage * 100)) + 600) / 100);
+              Console.WriteLine("You lost some workers because your wage was too low!");
+            }
+            if (revenue < -10000) {
+              Console.WriteLine("You went out of business!");
+              break;
+            } 
+            month++; 
+          }
         }
-      }
-    } else if (res == "stop") {
-      break;
-    }
-    if (wage <= 6) {
-      workers = workers - (workers / 4);
-      Console.WriteLine("You lost some workers because your wage was too low!");
-    }
-    if (revenue < -10000) {
-      Console.WriteLine("You went out of business!");
-      break;
-    } 
-   month++; 
-  }
-}
 }
