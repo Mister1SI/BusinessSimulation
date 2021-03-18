@@ -6,6 +6,7 @@ class MainClass {
     float workerCost = 100000, wage = 10;
     double companyValue = 750000, personalProfit = 45000, envCosts = 20000;
     int month = 1, workers = 10000;
+    bool wageChange = true, workerChange = true;
     Console.WriteLine("Welcome to the business simulator.\n==========\nPlease enter your name:");
     name = Console.ReadLine();
     Console.WriteLine("Please enter your company name:");
@@ -18,8 +19,31 @@ class MainClass {
     res = Console.ReadLine();
     if (res == "y") {
       Console.WriteLine("Change to what?");
-      wage = (float)Console.ReadLine();
-      Console.WriteLine("Changed wage to " + wage + ".");
+      while (wageChange) {
+        try {
+          wage = float.Parse(Console.ReadLine());
+          workerCost = workers * wage;
+          Console.WriteLine("Changed wage to " + wage + ". Current worker costs: $" + workerCost + "\nCurrent workers: " + workers);
+          wageChange = false;
+        } catch (Exception e) {
+          Console.WriteLine("That's not a valid in-range number. Change to what?");
+        }
+      }
+    }
+    Console.WriteLine("Change amount of workers?(y or n)");
+    res = Console.ReadLine();
+    if (res == "y") {
+      Console.WriteLine("Change to what?");
+      while (workerChange) {
+        try {
+          workers = Convert.ToInt32(Console.ReadLine());
+          workerCost = workers * wage;
+          Console.WriteLine("Changed workers to " + workers + ". Current worker costs: " + workerCost);
+          workerChange = false;
+        } catch (Exception e) {
+          Console.WriteLine("That's not a valid in-range number. Chnage to what?");
+        }
+      }
     }
   }
 }
