@@ -13,9 +13,10 @@ class MainClass {
     companyName = Console.ReadLine();
     Console.WriteLine("Thank you. Press enter to begin.");
     Console.ReadKey();
-    Console.WriteLine("==========\n\nStart of month 1\nCost of workers: $" + workerCost + "\nEnvironment costs: $" + envCosts + "\nCompany Value: $" + companyValue + "\nYour profit per month: $" + personalProfit);
+    while (true) {
+    Console.WriteLine("==========\n\nStart of month " + month + "\nCost of workers: $" + workerCost + "\nEnvironment costs: $" + envCosts + "\nCompany Value: $" + companyValue + "\nYour profit per month: $" + personalProfit);
     Console.WriteLine("\nAmount of workers: " + workers);
-    Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n)");
+    Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
     res = Console.ReadLine();
     if (res == "y") {
       Console.WriteLine("Change to what?");
@@ -29,8 +30,10 @@ class MainClass {
           Console.WriteLine("That's not a valid in-range number. Change to what?");
         }
       }
+    } else if (res == "stop") {
+      break;
     }
-    Console.WriteLine("Change amount of workers?(y or n)");
+    Console.WriteLine("Change amount of workers?(y or n or stop)");
     res = Console.ReadLine();
     if (res == "y") {
       Console.WriteLine("Change to what?");
@@ -44,6 +47,10 @@ class MainClass {
           Console.WriteLine("That's not a valid in-range number. Chnage to what?");
         }
       }
+    } else if (res == "stop") {
+      break;
     }
+   month++; 
   }
+}
 }
