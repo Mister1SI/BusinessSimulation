@@ -39,7 +39,11 @@ class MainClass
             Console.WriteLine($"==========\n\nStart of month {month}\nCost of workers: ${workerCost}\nEnvironment costs: ${envCosts}\nCompany Value: ${companyValue}\nRevenue per month: ${revenue}\nYour profit per month: ${personalProfit}");
             Console.WriteLine("\nAmount of workers: " + workers);
             Console.WriteLine("Enter a command(help for a list):");
-            command = Console.ReadLine();
+            command = "";
+            
+            
+            while (command != "next") {
+              command = Console.ReadLine();
             switch (command) {
               case "wage":
                 Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
@@ -66,6 +70,7 @@ class MainClass
                 {
                   return;
                 }
+                command = null;
             break;
             case "workers":
               Console.WriteLine("Change amount of workers?(y or n or stop)");
@@ -96,6 +101,7 @@ class MainClass
                   }
             
                 }
+                command = null;
             break;
             case "env":
               Console.WriteLine("Change environment preservance costs?(y or n or stop)");
@@ -121,7 +127,25 @@ class MainClass
             {
                 return;
             }
+            command = null;
             break;
+            case "help":
+              Console.WriteLine("help - show this list\nwage - change your worker's wages\nworkers - change how many workers you have\nenv - change your environment costs\nnext - go to the next month");
+              command = null;
+              break;
+            default:
+              if (command != "next") {
+              Console.WriteLine("That's not a valid command.");
+              break;
+              }
+              command = null;
+              break;
+            
+            }
+            if (command == "next") {
+              break;
+            }
+            command = null;
             }
             if (wage <= 6)
             {
