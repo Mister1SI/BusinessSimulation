@@ -5,12 +5,29 @@ class MainClass
 {
     public static void Main(string[] args)
     {
-        string name, companyName, res;
+        var rand = new Random();
+        string name, companyName, res, command;
         float workerCost = 100000, wage = 10;
-        double companyValue = 11110237.19, personalProfit, envCosts = 20000, revenue = 195792.64;
-        int month = 1, workers = 1000, workerChangeNum, workerChangeIn;
+        double companyValue = 11110237.19, personalProfit, envCosts = 20000, revenue = 1695792.64;
+        long month = 1, workers = 1000, workerChangeNum, workerChangeIn;
         bool wageChange = true, workerChange = true, envChange = true;
-        personalProfit = revenue * 0.01;
+        string[] randomEvents = new string[7] {
+          "officeDestroyed",
+          "deathAssassinated",
+          "foodMarketCrash",
+          "electronicsMarketCrash",
+          "fuelMarketCrash",
+          "transportationMarketCrash",
+          "hospitalityMarketCrash"
+        };
+        string[] products = new string[5] {
+          "food",
+          "electronics",
+          "fuel",
+          "transportation",
+          "hospitality"
+        };
+        personalProfit = revenue * 0.1;
         Console.WriteLine("Welcome to the business simulator.\n==========\nPlease enter your name:");
         name = Console.ReadLine();
         Console.WriteLine("Please enter your company name:");
@@ -19,15 +36,19 @@ class MainClass
         Console.ReadKey();
         while (true)
         {
-            Console.WriteLine("==========\n\nStart of month " + month + "\nCost of workers: $" + workerCost + "\nEnvironment costs: $" + envCosts + "\nCompany Value: $" + companyValue + "\nYour profit per month: $" + personalProfit);
+            Console.WriteLine($"==========\n\nStart of month {month}\nCost of workers: ${workerCost}\nEnvironment costs: ${envCosts}\nCompany Value: ${companyValue}\nRevenue per month: ${revenue}\nYour profit per month: ${personalProfit}");
             Console.WriteLine("\nAmount of workers: " + workers);
-            Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
-            res = Console.ReadLine();
-            if (res == "y")
-            {
-                Console.WriteLine("Change to what?");
-                while (wageChange)
+            Console.WriteLine("Enter a command(help for a list):");
+            command = Console.ReadLine();
+            switch (command) {
+              case "wage":
+                Console.WriteLine("\nChange workers wage?(current wage: " + wage + ")(y or n or stop)");
+                res = Console.ReadLine();
+                if (res == "y")
                 {
+                  Console.WriteLine("Change to what?");
+                  while (wageChange)
+                  {
                     try
                     {
                         wage = float.Parse(Console.ReadLine());
@@ -39,16 +60,18 @@ class MainClass
                     {
                         Console.WriteLine("That's not a valid in-range number. Change to what?");
                     }
+                  }
+                 }
+                else if (res == "stop")
+                {
+                  return;
                 }
-            }
-            else if (res == "stop")
-            {
-                break;
-            }
-            Console.WriteLine("Change amount of workers?(y or n or stop)");
-            res = Console.ReadLine();
-            if (res == "y")
-            {
+            break;
+            case "workers":
+              Console.WriteLine("Change amount of workers?(y or n or stop)");
+              res = Console.ReadLine();
+              if (res == "y")
+              {
                 Console.WriteLine("Change to what?");
                 while (workerChange)
                 {
@@ -70,12 +93,15 @@ class MainClass
                     {
                         Console.WriteLine("That's not a valid in-range number. Chnage to what?");
                     }
+                  }
+            
                 }
-            }
-            Console.WriteLine("Change environment preservance costs?(y or n or stop)");
-            res = Console.ReadLine();
-            if (res == "y")
-            {
+            break;
+            case "env":
+              Console.WriteLine("Change environment preservance costs?(y or n or stop)");
+              res = Console.ReadLine();
+              if (res == "y")
+              {
                 Console.WriteLine("Change to what?");
                 while (envChange)
                 {
@@ -93,7 +119,9 @@ class MainClass
             }
             else if (res == "stop")
             {
-                break;
+                return;
+            }
+            break;
             }
             if (wage <= 6)
             {
@@ -103,11 +131,11 @@ class MainClass
             if (revenue < -10000)
             {
                 Console.WriteLine("You went out of business!");
-                break;
+                return;
             }
             personalProfit = revenue * 0.01;
             companyValue = companyValue + revenue - workerCost - envCosts - personalProfit;
             month++;
+            }
         }
     }
-}
