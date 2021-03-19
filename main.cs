@@ -70,7 +70,7 @@ class MainClass
                 {
                   return;
                 }
-                command = null;
+                
             break;
             case "workers":
               Console.WriteLine("Change amount of workers?(y or n or stop)");
@@ -101,7 +101,7 @@ class MainClass
                   }
             
                 }
-                command = null;
+                
             break;
             case "env":
               Console.WriteLine("Change environment preservance costs?(y or n or stop)");
@@ -127,25 +127,25 @@ class MainClass
             {
                 return;
             }
-            command = null;
+            
             break;
             case "help":
               Console.WriteLine("help - show this list\nwage - change your worker's wages\nworkers - change how many workers you have\nenv - change your environment costs\nnext - go to the next month");
-              command = null;
+              
               break;
             default:
               if (command != "next") {
               Console.WriteLine("That's not a valid command.");
               break;
               }
-              command = null;
+              
               break;
             
             }
             if (command == "next") {
               break;
             }
-            command = null;
+            
             }
             if (wage <= 6)
             {
